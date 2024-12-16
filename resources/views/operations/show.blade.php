@@ -1,3 +1,9 @@
-<div>
-    <!-- Simplicity is the consequence of refined emotions. - Jean D'Alembert -->
-</div>
+@extends('layouts.main')
+
+@section('title','Operação')
+
+@section('content')
+
+    <h2>Detalhes da Operação</h2>
+
+@endsection

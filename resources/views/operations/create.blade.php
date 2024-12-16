@@ -1,3 +1,9 @@
-<div>
-    <!-- Nothing worth having comes easy. - Theodore Roosevelt -->
-</div>
+@extends('layouts.main')
+
+@section('title','Operação')
+
+@section('content')
+
+    <h2>Nova Operação</h2>
+
+@endsection

@@ -1,3 +1,9 @@
-<div>
-    <!-- The biggest battle is the war against ignorance. - Mustafa Kemal Atatürk -->
-</div>
+@extends('layouts.main')
+
+@section('title','Operação')
+
+@section('content')
+
+    <h2>Alteração de Operação</h2>
+
+@endsection

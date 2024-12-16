@@ -1,3 +1,9 @@
-<div>
-    <!-- It is quality rather than quantity that matters. - Lucius Annaeus Seneca -->
-</div>
+@extends('layouts.main')
+
+@section('title','Conta')
+
+@section('content')
+
+    <h2>Detalhes da Conta</h2>
+
+@endsection

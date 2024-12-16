@@ -1,3 +1,9 @@
-<div>
-    <!-- Happiness is not something readymade. It comes from your own actions. - Dalai Lama -->
-</div>
+@extends('layouts.main')
+
+@section('title','Conta')
+
+@section('content')
+
+    <h2>Nova Conta</h2>
+
+@endsection

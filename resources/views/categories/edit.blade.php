@@ -1,3 +1,9 @@
-<div>
-    <!-- The whole future lies in uncertainty: live immediately. - Seneca -->
-</div>
+@extends('layouts.main')
+
+@section('title','Categoria')
+
+@section('content')
+
+    <h2>Alteração de Categoria</h2>
+
+@endsection
