@@ -6,6 +6,7 @@ use App\Models\Bank;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreBankRequest;
 use App\Http\Requests\UpdateBankRequest;
+use Illuminate\Http\Request;
 
 class BankController extends Controller
 {
@@ -14,7 +15,10 @@ class BankController extends Controller
      */
     public function index()
     {
-        return \view('banks.index');
+        $banks = Bank::orderBy('name', 'ASC')->get();
+
+
+        return \view('banks.index',['banks' => $banks]);
     }
 
     /**
@@ -28,9 +32,17 @@ class BankController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreBankRequest $request)
+    //public function store(StoreBankRequest $request)
+    public function store(Request $request)
     {
-        //
+        Bank::create([
+            'code' => $request->code,
+            'name' => $request->name,
+        ]);
+
+        return \redirect()
+                    ->route('banks.index')
+                    ->with('success', 'Banco cadastrado com sucesso!');;
     }
 
     /**
@@ -38,7 +50,8 @@ class BankController extends Controller
      */
     public function show(Bank $bank)
     {
-        return \view('banks.show');
+
+        return \view('banks.show', ['bank' => $bank]);
     }
 
     /**
@@ -46,7 +59,7 @@ class BankController extends Controller
      */
     public function edit(Bank $bank)
     {
-        return \view('banks.edit');
+        return \view('banks.edit', ['bank' => $bank]);
     }
 
     /**
@@ -54,7 +67,15 @@ class BankController extends Controller
      */
     public function update(UpdateBankRequest $request, Bank $bank)
     {
-        //
+        $bank->update([
+            'code' => $request->code,
+            'name' => $request->name,
+        ]);
+
+        return \redirect()
+                    ->route('banks.index')
+                    ->with('success', 'Banco alterado com sucesso!');
+
     }
 
     /**
@@ -62,6 +83,18 @@ class BankController extends Controller
      */
     public function destroy(Bank $bank)
     {
-        //
+        return \view('banks.destroy', ['bank' => $bank]);
+    }
+
+    public function disable(UpdateBankRequest $request, Bank $bank)
+    {
+        $bank->update([
+            'status' => 0,
+        ]);
+
+        return \redirect()
+                    ->route('banks.index')
+                    ->with('success', 'Banco excluído com sucesso!');
+
     }
 }

@@ -6,4 +6,6 @@
 
     <h2>Listas de Contas</h2>
 
+    <a href="{{ route('accounts.create') }}">Nova Conta</a>
+
 @endsection

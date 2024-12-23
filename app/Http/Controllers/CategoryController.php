@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
+use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
@@ -28,9 +29,16 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreCategoryRequest $request)
+    //public function store(StoreCategoryRequest $request)
+    public function store(Request $request)
     {
-        //
+        Category::create([
+            'name' => $request->name,
+        ]);
+
+        return \redirect()
+                    ->route('categories.index')
+                    ->with('success', 'Categoria cadastrada com sucesso!');
     }
 
     /**
