@@ -4,9 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Bank;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreBankRequest;
-use App\Http\Requests\UpdateBankRequest;
-use Illuminate\Http\Request;
+use App\Http\Requests\BankRequest;
 
 class BankController extends Controller
 {
@@ -33,8 +31,10 @@ class BankController extends Controller
      * Store a newly created resource in storage.
      */
     //public function store(StoreBankRequest $request)
-    public function store(Request $request)
+    public function store(BankRequest $request)
     {
+        $request->validated();
+
         Bank::create([
             'code' => $request->code,
             'name' => $request->name,
@@ -42,7 +42,7 @@ class BankController extends Controller
 
         return \redirect()
                     ->route('banks.index')
-                    ->with('success', 'Banco cadastrado com sucesso!');;
+                    ->with('success', 'Banco cadastrado com sucesso!');
     }
 
     /**
@@ -65,7 +65,7 @@ class BankController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateBankRequest $request, Bank $bank)
+    public function update(BankRequest $request, Bank $bank)
     {
         $bank->update([
             'code' => $request->code,
@@ -86,7 +86,7 @@ class BankController extends Controller
         return \view('banks.destroy', ['bank' => $bank]);
     }
 
-    public function disable(UpdateBankRequest $request, Bank $bank)
+    public function disable(Bank $bank)
     {
         $bank->update([
             'status' => 0,

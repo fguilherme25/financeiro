@@ -8,9 +8,7 @@
 
     <a href="{{ route('banks.create') }}">Novo Banco</a><br><hr><br>
 
-    @if (session('success'))
-        <p>{{ session('success') }}</p>
-    @endif
+    <x-alert />
 
     @forelse ($banks as $bank)
         {{ $bank->code }} - {{ $bank->name }} 

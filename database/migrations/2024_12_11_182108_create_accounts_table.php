@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('type', length: 2);
             $table->double('limit');
             $table->double('balance');
-            $table->integer('status');
+            $table->integer('status')->default(1);
             $table->timestamps();
         });
     }

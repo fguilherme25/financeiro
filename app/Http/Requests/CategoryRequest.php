@@ -4,14 +4,14 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateOperationRequest extends FormRequest
+class CategoryRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return false;
+        return \true;
     }
 
     /**
@@ -22,7 +22,15 @@ class UpdateOperationRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => 'required|unique:categories,name,'.$this->id,
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'name.required' => 'É obrigatório informar o NOME da Categoria',
+            'name.unique' => 'O NOME informado já está cadastrado',
         ];
     }
 }

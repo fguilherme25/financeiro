@@ -3,6 +3,7 @@
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\BankController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\OperationController;
 use Illuminate\Support\Facades\Route;
 
@@ -20,16 +21,6 @@ Route::put('/banks/update/{bank}', [BankController::class, 'update'])->name('ban
 Route::get('/banks/destroy/{bank}', [BankController::class, 'destroy'])->name('banks.destroy');
 Route::put('/banks/disable/{bank}', [BankController::class, 'disable'])->name('banks.disable');
 
-//Accounts
-Route::get('/accounts', [AccountController::class, 'index'])->name('accounts.index');
-Route::get('/accounts/show/{account}', [AccountController::class, 'show'])->name('accounts.show');
-Route::get('/accounts/create', [AccountController::class, 'create'])->name('accounts.create');
-Route::post('/accounts/store', [AccountController::class, 'store'])->name('accounts.store');
-Route::get('/accounts/edit/{account}', [AccountController::class, 'edit'])->name('accounts.edit');
-Route::put('/accounts/update/{account}', [AccountController::class, 'update'])->name('accounts.update');
-Route::get('/accounts/destroy/{account}', [AccountController::class, 'destroy'])->name('accounts.destroy');
-Route::put('/accounts/disable/{account}', [AccountController::class, 'disable'])->name('accounts.disable');
-
 //Categories
 Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
 Route::get('/categories/show/{category}', [CategoryController::class, 'show'])->name('categories.show');
@@ -40,6 +31,25 @@ Route::put('/categories/update/{category}', [CategoryController::class, 'update'
 Route::get('/categories/destroy/{category}', [CategoryController::class, 'destroy'])->name('categories.destroy');
 Route::put('/categories/disable/{category}', [CategoryController::class, 'disable'])->name('categories.disable');
 
+//Expenses
+Route::get('/expenses', [ExpenseController::class, 'index'])->name('expenses.index');
+Route::get('/expenses/show/{expense}', [ExpenseController::class, 'show'])->name('expenses.show');
+Route::get('/expenses/create', [ExpenseController::class, 'create'])->name('expenses.create');
+Route::post('/expenses/store', [ExpenseController::class, 'store'])->name('expenses.store');
+Route::get('/expenses/edit/{expense}', [ExpenseController::class, 'edit'])->name('expenses.edit');
+Route::put('/expenses/update/{expense}', [ExpenseController::class, 'update'])->name('expenses.update');
+Route::get('/expenses/destroy/{expense}', [ExpenseController::class, 'destroy'])->name('expenses.destroy');
+Route::put('/expenses/disable/{expense}', [ExpenseController::class, 'disable'])->name('expenses.disable');
+
+//Accounts
+Route::get('/accounts', [AccountController::class, 'index'])->name('accounts.index');
+Route::get('/accounts/show/{account}', [AccountController::class, 'show'])->name('accounts.show');
+Route::get('/accounts/create', [AccountController::class, 'create'])->name('accounts.create');
+Route::post('/accounts/store', [AccountController::class, 'store'])->name('accounts.store');
+Route::get('/accounts/edit/{account}', [AccountController::class, 'edit'])->name('accounts.edit');
+Route::put('/accounts/update/{account}', [AccountController::class, 'update'])->name('accounts.update');
+Route::get('/accounts/destroy/{account}', [AccountController::class, 'destroy'])->name('accounts.destroy');
+Route::put('/accounts/disable/{account}', [AccountController::class, 'disable'])->name('accounts.disable');
 
 //Operations
 Route::get('/operations', [OperationController::class, 'index'])->name('operations.index');
