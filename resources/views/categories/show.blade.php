@@ -10,4 +10,11 @@
 
     Nome da Categoria: {{ $category->name }} <br><br>
 
+    <hr>
+
+    @forelse ($category->expense as $expense)
+        {{ $expense->name }} <br>
+    @empty
+        <p>Nenhuma Despesa Cadastrada!</p>
+    @endforelse
 @endsection

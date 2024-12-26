@@ -16,8 +16,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::orderBy('name', 'ASC')->get();
-
+        $categories = Category::where('status', 1)
+            ->orderBy('name')
+            ->get();
 
         return \view('categories.index',['categories' => $categories]);
     }
@@ -43,7 +44,7 @@ class CategoryController extends Controller
         ]);
 
         return \redirect()
-                    ->route('categories.index')
+                    ->route('category.index')
                     ->with('success', 'Categoria cadastrada com sucesso!');
     }
 
@@ -73,7 +74,7 @@ class CategoryController extends Controller
         ]);
 
         return \redirect()
-                    ->route('categories.index')
+                    ->route('category.index')
                     ->with('success', 'Categoria alterada com sucesso!');
     }
 
@@ -92,7 +93,7 @@ class CategoryController extends Controller
         ]);
 
         return \redirect()
-                    ->route('categories.index')
+                    ->route('category.index')
                     ->with('success', 'Categoria excluída com sucesso!');
 
     }

@@ -13,8 +13,9 @@ class BankController extends Controller
      */
     public function index()
     {
-        $banks = Bank::orderBy('name', 'ASC')->get();
-
+        $banks = Bank::where('status', 1)
+            ->orderBy('name')
+            ->get();
 
         return \view('banks.index',['banks' => $banks]);
     }
@@ -41,7 +42,7 @@ class BankController extends Controller
         ]);
 
         return \redirect()
-                    ->route('banks.index')
+                    ->route('bank.index')
                     ->with('success', 'Banco cadastrado com sucesso!');
     }
 
@@ -73,7 +74,7 @@ class BankController extends Controller
         ]);
 
         return \redirect()
-                    ->route('banks.index')
+                    ->route('bank.index')
                     ->with('success', 'Banco alterado com sucesso!');
 
     }
@@ -93,7 +94,7 @@ class BankController extends Controller
         ]);
 
         return \redirect()
-                    ->route('banks.index')
+                    ->route('bank.index')
                     ->with('success', 'Banco excluído com sucesso!');
 
     }

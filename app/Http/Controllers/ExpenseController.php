@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Expense;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreExpenseRequest;
+use App\Http\Requests\ExpenseRequest;
 use App\Http\Requests\UpdateExpenseRequest;
+use App\Models\Category;
 
 class ExpenseController extends Controller
 {
@@ -14,7 +15,11 @@ class ExpenseController extends Controller
      */
     public function index()
     {
-        //
+        $expenses = Expense::where('status', 1)
+            ->orderBy('name')
+            ->get();
+
+        return \view('expenses.index',['expenses' => $expenses]);
     }
 
     /**
@@ -22,15 +27,28 @@ class ExpenseController extends Controller
      */
     public function create()
     {
-        //
+        $categories = Category::where('status', 1)
+            ->orderBy('name')
+            ->get();
+
+        return \view('expenses.create',['categories' => $categories]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreExpenseRequest $request)
+    public function store(ExpenseRequest $request)
     {
-        //
+        $request->validated();
+
+        Expense::create([
+            'category_id' => $request->category_id,
+            'name' => $request->name,
+        ]);
+
+        return \redirect()
+                    ->route('expense.index')
+                    ->with('success', 'Despesa cadastrada com sucesso!');
     }
 
     /**
@@ -38,7 +56,7 @@ class ExpenseController extends Controller
      */
     public function show(Expense $expense)
     {
-        //
+        return \view('expenses.show', ['expense' => $expense]);
     }
 
     /**
@@ -46,15 +64,29 @@ class ExpenseController extends Controller
      */
     public function edit(Expense $expense)
     {
-        //
+        $categories = Category::where('status', 1)
+            ->orderBy('name')
+            ->get();
+
+        return \view('expenses.edit', [
+            'expense' => $expense,
+            'categories' => $categories,
+            ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateExpenseRequest $request, Expense $expense)
+    public function update(ExpenseRequest $request, Expense $expense)
     {
-        //
+        $expense->update([
+            'category_id' => $request->category_id,
+            'name' => $request->name,
+        ]);
+
+        return \redirect()
+                    ->route('expense.index')
+                    ->with('success', 'Despesa alterada com sucesso!');
     }
 
     /**
@@ -62,6 +94,18 @@ class ExpenseController extends Controller
      */
     public function destroy(Expense $expense)
     {
-        //
+        return \view('expenses.destroy', ['expense' => $expense]);
+    }
+
+    public function disable(Expense $expense)
+    {
+        $expense->update([
+            'status' => 0,
+        ]);
+
+        return \redirect()
+                    ->route('expense.index')
+                    ->with('success', 'Despesa excluída com sucesso!');
+
     }
 }

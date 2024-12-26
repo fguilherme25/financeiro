@@ -6,7 +6,7 @@
 
     <h2>Lista de Categorias</h2>
 
-    <a href="{{ route('categories.create') }}">Nova Categoria</a><br><hr><br>
+    <a href="{{ route('category.create') }}">Nova Categoria</a><br><hr><br>
 
     <x-alert />
 
