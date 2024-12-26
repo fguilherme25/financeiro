@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use Exception;
 use App\Models\Category;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CategoryRequest;
-use App\Http\Requests\StoreCategoryRequest;
-use App\Http\Requests\UpdateCategoryRequest;
-use Illuminate\Http\Request;
+
 
 class CategoryController extends Controller
 {
@@ -39,13 +39,27 @@ class CategoryController extends Controller
     {
         $request->validated();
 
-        Category::create([
-            'name' => $request->name,
-        ]);
+        DB::beginTransaction();
 
-        return \redirect()
-                    ->route('category.index')
-                    ->with('success', 'Categoria cadastrada com sucesso!');
+        try{
+
+            Category::create([
+                'name' => $request->name,
+            ]);
+
+            DB::commit();
+
+            return \redirect()
+                        ->route('category.index')
+                        ->with('success', 'Categoria cadastrada com sucesso!');
+        } catch (Exception $e){
+
+            DB::rollBack();
+
+            return \redirect()
+                        ->route('category.index')
+                        ->with('error', 'Erro ao tentar cadastrar a Categoria!');
+        }
     }
 
     /**
@@ -69,13 +83,31 @@ class CategoryController extends Controller
      */
     public function update(CategoryRequest $request, Category $category)
     {
-        $category->update([
-            'name' => $request->name,
-        ]);
 
-        return \redirect()
-                    ->route('category.index')
-                    ->with('success', 'Categoria alterada com sucesso!');
+        $request->validated();
+
+        DB::beginTransaction();
+
+        try{
+
+            $category->update([
+                'name' => $request->name,
+            ]);
+
+            DB::commit();
+
+            return \redirect()
+                        ->route('category.index')
+                        ->with('success', 'Categoria alterada com sucesso!');
+        } catch (Exception $e){
+
+            DB::rollBack();
+
+            return \redirect()
+                        ->route('category.index')
+                        ->with('error', 'Erro ao tentar atualizar a Categoria!');
+
+        }
     }
 
     /**
@@ -88,13 +120,27 @@ class CategoryController extends Controller
 
     public function disable(Category $category)
     {
-        $category->update([
-            'status' => 0,
-        ]);
+        DB::beginTransaction();
 
-        return \redirect()
-                    ->route('category.index')
-                    ->with('success', 'Categoria excluída com sucesso!');
+        try{
 
+            $category->update([
+                'status' => 0,
+            ]);
+
+            DB::commit();
+
+            return \redirect()
+                        ->route('category.index')
+                        ->with('success', 'Categoria excluída com sucesso!');
+        } catch (Exception $e){
+           
+            DB::rollBack();
+
+            return \redirect()
+                        ->route('category.index')
+                        ->with('error', 'Erro ao tentar excluir a Categoria!');
+ 
+        }
     }
 }

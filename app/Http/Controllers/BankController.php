@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Bank;
-use App\Http\Controllers\Controller;
 use App\Http\Requests\BankRequest;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use Exception;
 
 class BankController extends Controller
 {
@@ -36,14 +38,28 @@ class BankController extends Controller
     {
         $request->validated();
 
-        Bank::create([
-            'code' => $request->code,
-            'name' => $request->name,
-        ]);
+        DB::beginTransaction();
 
-        return \redirect()
-                    ->route('bank.index')
-                    ->with('success', 'Banco cadastrado com sucesso!');
+        try{
+            Bank::create([
+                'code' => $request->code,
+                'name' => $request->name,
+            ]);
+
+            DB::commit();
+
+            return \redirect()
+                        ->route('bank.index')
+                        ->with('success', 'Banco cadastrado com sucesso!');
+
+        } catch (Exception $e){
+            
+            DB::rollBack();
+
+            return \redirect()
+                        ->route('bank.index')
+                        ->with('error', 'Erro ao tentar cadastrar o Banco!');
+        };
     }
 
     /**
@@ -68,15 +84,30 @@ class BankController extends Controller
      */
     public function update(BankRequest $request, Bank $bank)
     {
-        $bank->update([
-            'code' => $request->code,
-            'name' => $request->name,
-        ]);
+        $request->validated();
 
-        return \redirect()
-                    ->route('bank.index')
-                    ->with('success', 'Banco alterado com sucesso!');
+        DB::beginTransaction();
 
+        try{
+
+            $bank->update([
+                'code' => $request->code,
+                'name' => $request->name,
+            ]);
+
+            DB::commit();
+
+            return \redirect()
+                        ->route('bank.index')
+                        ->with('success', 'Banco alterado com sucesso!');
+        } catch (Exception $e){
+
+            DB::rollBack();
+
+            return \redirect()
+                        ->route('bank.index')
+                        ->with('error', 'Erro ao tentar alterar o Banco!');
+        }
     }
 
     /**
@@ -89,13 +120,25 @@ class BankController extends Controller
 
     public function disable(Bank $bank)
     {
-        $bank->update([
-            'status' => 0,
-        ]);
+        DB::beginTransaction();
 
-        return \redirect()
-                    ->route('bank.index')
-                    ->with('success', 'Banco excluído com sucesso!');
+        try{
+            $bank->update([
+                'status' => 0,
+            ]);
 
+            return \redirect()
+                        ->route('bank.index')
+                        ->with('success', 'Banco excluído com sucesso!');
+
+        DB::commit();
+
+        } catch (Exception $e){
+            DB::rollBack();
+
+            return \redirect()
+                        ->route('bank.index')
+                        ->with('error', 'Erro ao tentar excluir o Banco!');
+        }
     }
 }

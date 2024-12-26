@@ -20,11 +20,8 @@
             @endforeach 
         </select><br><br>
 
-
-
         <label>Nome da Despesa</label><br>
         <input type="text" name="name" id="name" placeholder="Nome da Categoria" value="{{ old('name',$expense->name) }}" ><br><br>
-
 
         <button type="submit">Salvar</button>
     </form>

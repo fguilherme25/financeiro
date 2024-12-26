@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Expense;
+use App\Models\Category;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ExpenseRequest;
 use App\Http\Requests\UpdateExpenseRequest;
-use App\Models\Category;
+use Exception;
 
 class ExpenseController extends Controller
 {
@@ -41,14 +43,27 @@ class ExpenseController extends Controller
     {
         $request->validated();
 
-        Expense::create([
-            'category_id' => $request->category_id,
-            'name' => $request->name,
-        ]);
+        DB::beginTransaction();
 
-        return \redirect()
-                    ->route('expense.index')
-                    ->with('success', 'Despesa cadastrada com sucesso!');
+        try{
+
+            Expense::create([
+                'category_id' => $request->category_id,
+                'name' => $request->name,
+            ]);
+
+            DB::commit();
+
+            return \redirect()
+                        ->route('expense.index')
+                        ->with('success', 'Despesa cadastrada com sucesso!');
+        } catch (Exception $e){
+            DB::rollBack();
+
+            return \redirect()
+                        ->route('expense.index')
+                        ->with('error', 'Erro ao tentar cadastrar a Despesa!');
+        }
     }
 
     /**
@@ -79,14 +94,29 @@ class ExpenseController extends Controller
      */
     public function update(ExpenseRequest $request, Expense $expense)
     {
-        $expense->update([
-            'category_id' => $request->category_id,
-            'name' => $request->name,
-        ]);
+        $request->validated();
 
-        return \redirect()
-                    ->route('expense.index')
-                    ->with('success', 'Despesa alterada com sucesso!');
+        DB::beginTransaction();
+
+        try{
+
+            $expense->update([
+                'category_id' => $request->category_id,
+                'name' => $request->name,
+            ]);
+
+            DB::commit();
+
+            return \redirect()
+                        ->route('expense.index')
+                        ->with('success', 'Despesa alterada com sucesso!');
+        } catch (Exception $e){
+            DB::rollBack();
+
+            return \redirect()
+                        ->route('expense.index')
+                        ->with('error', 'Erro ao tentar alterar a Despesa!');
+        }
     }
 
     /**
@@ -99,13 +129,26 @@ class ExpenseController extends Controller
 
     public function disable(Expense $expense)
     {
-        $expense->update([
-            'status' => 0,
-        ]);
+        DB::beginTransaction();
 
-        return \redirect()
-                    ->route('expense.index')
-                    ->with('success', 'Despesa excluída com sucesso!');
+        try{
 
+            $expense->update([
+                'status' => 0,
+            ]);
+
+            DB::commit();
+
+            return \redirect()
+                        ->route('expense.index')
+                        ->with('success', 'Despesa excluída com sucesso!');
+        } catch (Exception $e){
+
+            DB::rollBack();
+
+            return \redirect()
+                        ->route('expense.index')
+                        ->with('error', 'Erro ao tentar excluir a Despesa!');
+        }
     }
 }
