@@ -12,9 +12,9 @@
 
     @forelse ($categories as $category)
         {{ $category->name }} 
-        | <a href="{{ route('categories.show', ['category' => $category->id]) }}">Abrir</a>
-        | <a href="{{ route('categories.edit', ['category' => $category->id]) }}">Editar</a>
-        | <a href="{{ route('categories.destroy', ['category' => $category->id]) }}">Excluir</a>
+        | <a href="{{ route('category.show', ['category' => $category->id]) }}">Abrir</a>
+        | <a href="{{ route('category.edit', ['category' => $category->id]) }}">Editar</a>
+        | <a href="{{ route('category.destroy', ['category' => $category->id]) }}">Excluir</a>
         <hr><br>
     @empty
         <p>Nenhuma Categoria cadastrado!</p>

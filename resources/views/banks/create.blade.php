@@ -8,7 +8,7 @@
 
     <x-alert />
 
-     <form action="{{ route('banks.store') }}" method="POST">
+     <form action="{{ route('bank.store') }}" method="POST">
         @csrf
 
         <label>Código</label><br>

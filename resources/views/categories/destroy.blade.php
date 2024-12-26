@@ -6,7 +6,7 @@
 
     <h2>Exclusão de Categoria</h2>
 
-    <form action="{{ route('categories.disable', ['category' => $category->id])}}" method="POST">
+    <form action="{{ route('category.disable', ['category' => $category->id])}}" method="POST">
         @csrf
         @method('PUT')
 
@@ -15,7 +15,7 @@
         Nome da Categoria: {{ $category->name }} <br><br>
 
         <button type="submit">Confirmar</button> 
-        | <a href="{{ route('categories.index') }}">Cancelar </a><br><hr><br>
+        | <a href="{{ route('category.index') }}">Cancelar </a><br><hr><br>
     </form>
 
 @endsection

@@ -8,7 +8,7 @@
 
     <x-alert />
 
-    <form action="{{ route('banks.update', ['bank' => $bank->id])}}" method="POST">
+    <form action="{{ route('bank.update', ['bank' => $bank->id])}}" method="POST">
         @csrf
         @method('PUT')
 

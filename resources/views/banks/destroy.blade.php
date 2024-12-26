@@ -6,7 +6,7 @@
 
     <h2>Exclusão de Banco</h2>
 
-    <form action="{{ route('banks.disable', ['bank' => $bank->id])}}" method="POST">
+    <form action="{{ route('bank.disable', ['bank' => $bank->id])}}" method="POST">
         @csrf
         @method('PUT')
 
@@ -17,7 +17,7 @@
         Nome do Banco: {{ $bank->name }} <br><br>
 
         <button type="submit">Confirmar</button> 
-        | <a href="{{ route('banks.index') }}">Cancelar </a><br><hr><br>
+        | <a href="{{ route('bank.index') }}">Cancelar </a><br><hr><br>
     </form>
 
 @endsection

@@ -8,7 +8,7 @@
 
     <x-alert />
 
-     <form action="{{ route('categories.store') }}" method="POST">
+     <form action="{{ route('category.store') }}" method="POST">
         @csrf
 
         <label>Nome da Categoria</label><br>
