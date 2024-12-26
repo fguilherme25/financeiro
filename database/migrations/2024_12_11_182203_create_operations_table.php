@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('operations', function (Blueprint $table) {
             $table->id();
             $table->foreignId('account_id')->constrained();
-            $table->foreignId('category_id')->constrained();
+            $table->foreignId('expense_id')->constrained();
             $table->datetime('date');
             $table->string('type', length: 2);
             $table->string('description', length: 100);

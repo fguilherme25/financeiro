@@ -18,4 +18,11 @@ class Operation extends Model
         'status',
     ];
 
+    public function expense(){
+        return $this->belongsTo(Expense::class);
+    }
+
+    public function account(){
+        return $this->belongsTo(Account::class);
+    }
 }

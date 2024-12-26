@@ -19,4 +19,11 @@ class Account extends Model
        'status',
     ];
 
+    public function bank(){
+        return $this->belongsTo(Bank::class);
+    }
+
+    public function operation(){
+        return $this->hasMany(Operation::class);
+    }
 }

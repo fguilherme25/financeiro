@@ -13,4 +13,8 @@ class Bank extends Model
         'name',
         'status',
     ];
+
+    public function account(){
+        return $this->hasMany(Account::class);
+    }
 }

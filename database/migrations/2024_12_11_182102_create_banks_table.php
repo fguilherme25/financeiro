@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('code', length: 4);
             $table->string('name', length: 50);
+            $table->integer('status')->default(1);
             $table->timestamps();
         });
     }
