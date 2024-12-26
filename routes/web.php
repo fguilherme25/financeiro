@@ -60,3 +60,6 @@ Route::get('/operations/edit/{operation}', [OperationController::class, 'edit'])
 Route::put('/operations/update/{operation}', [OperationController::class, 'update'])->name('operation.update');
 Route::get('/operations/destroy/{operation}', [OperationController::class, 'destroy'])->name('operation.destroy');
 Route::put('/operations/disable/{operation}', [OperationController::class, 'disable'])->name('operation.disable');
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
