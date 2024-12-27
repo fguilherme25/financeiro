@@ -39,6 +39,10 @@
                             <div class="sb-sidenav-menu-heading">Sistema</div>
                             <a class="nav-link" href="{{ route('operation.index') }}">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                                Dashboard
+                            </a>
+                            <a class="nav-link" href="{{ route('operation.index') }}">
+                                <div class="sb-nav-link-icon"><i class="fa-solid fa-money-bill-transfer"></i></i></div>
                                 Movimentações
                             </a>
                             <div class="sb-sidenav-menu-heading">Cadastro</div>
@@ -68,13 +72,7 @@
             </div>
             <div id="layoutSidenav_content">
                 <main>
-                    <div class="container-fluid mt-4 px-4">
-                        <div class="card mb-4">
-                            <div class="card-body">
-                                @yield('content')
-                            </div>
-                        </div>
-                    </div>
+                    @yield('content')
                 </main>
             </div>
         </div>

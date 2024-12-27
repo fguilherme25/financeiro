@@ -1,15 +1,17 @@
 <?php
 
-use App\Http\Controllers\AccountController;
-use App\Http\Controllers\BankController;
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\ExpenseController;
-use App\Http\Controllers\OperationController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BankController;
+use App\Http\Controllers\AccountController;
+use App\Http\Controllers\ExpenseController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\OperationController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Auth::routes();
 
 //Banks
 Route::get('/banks', [BankController::class, 'index'])->name('bank.index');
@@ -60,6 +62,7 @@ Route::get('/operations/edit/{operation}', [OperationController::class, 'edit'])
 Route::put('/operations/update/{operation}', [OperationController::class, 'update'])->name('operation.update');
 Route::get('/operations/destroy/{operation}', [OperationController::class, 'destroy'])->name('operation.destroy');
 Route::put('/operations/disable/{operation}', [OperationController::class, 'disable'])->name('operation.disable');
-Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+
