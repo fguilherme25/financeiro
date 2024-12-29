@@ -36,7 +36,7 @@
                             <tr>
                                 <td>{{ $bank->code }}</td>
                                 <td>{{ $bank->name }}</td>
-                                <td class="d-flex flex-row-reverse">
+                                <td class="d-flex justify-content-end">
                                     <a href="{{ route('bank.show', ['bank' => $bank->id]) }}" class="btn btn-primary btn-sm me-1"><i class="fa-solid fa-file-lines"></i></a>
                                     <a href="{{ route('bank.edit', ['bank' => $bank->id]) }}" class="btn btn-warning btn-sm me-1"><i class="fa-solid fa-pencil"></i></a>
                                     <a href="{{ route('bank.destroy', ['bank' => $bank->id]) }}" class="btn btn-danger btn-sm me-1"><i class="fa-solid fa-trash-can"></i></a>

@@ -120,6 +120,7 @@ class BankController extends Controller
 
     public function disable(Bank $bank)
     {
+
         DB::beginTransaction();
 
         try{
@@ -127,11 +128,11 @@ class BankController extends Controller
                 'status' => 0,
             ]);
 
+            DB::commit();
+
             return \redirect()
                         ->route('bank.index')
                         ->with('success', 'Banco excluído com sucesso!');
-
-        DB::commit();
 
         } catch (Exception $e){
             DB::rollBack();

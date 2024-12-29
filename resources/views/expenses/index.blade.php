@@ -37,7 +37,7 @@
                                 <td>{{ $expense->name }}</td>
                                 <td>{{ $expense->category->name }}</td>
 
-                                <td class="d-flex flex-row-reverse">
+                                <td class="d-flex justify-content-end">
                                     <a href="{{ route('expense.show', ['expense' => $expense->id]) }}" class="btn btn-primary btn-sm me-1"><i class="fa-solid fa-file-lines"></i></a>
                                     <a href="{{ route('expense.edit', ['expense' => $expense->id]) }}" class="btn btn-warning btn-sm me-1"><i class="fa-solid fa-pencil"></i></a>
                                     <a href="{{ route('expense.destroy', ['expense' => $expense->id]) }}" class="btn btn-danger btn-sm me-1"><i class="fa-solid fa-trash-can"></i></a>

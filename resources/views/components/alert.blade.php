@@ -1,23 +1,35 @@
 @if (session('success'))
-    <p>{{ session('success') }}</p>
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ session('success') }}
+        <button type="button" class="btn-close btn-sm" data-bs-dismiss="alert" aria-label="Fechar"></button>
+    </div>  
 @endif
 
 @if (session('error'))
-    <p>{{ session('error') }}</p>
+    <div class="alert alert-danger" role="alert">
+        <div>
+            {{ session('error') }}
+        </div>
+    </div>
 @endif
 
 @if ($errors->has('code'))
-    <span>
+
+    <div class="alert alert-danger" role="alert">
         @foreach ($errors->get('code') as $error)
-            {{ $error }} <br><br>
+            <div>
+                {{ $error }}
+            </div>
         @endforeach
-    </span>
+    </div>
 @endif
 
 @if ($errors->has('name'))
-    <span>
+    <div class="alert alert-danger" role="alert">
         @foreach ($errors->get('name') as $error)
-            {{ $error }} <br><br>
+            <div>
+                {{ $error }}
+            </div>
         @endforeach
-    </span>
+    </div>
 @endif

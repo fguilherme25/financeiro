@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Financeiro - @yield('title')</title>
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/bootstrap-extended.css') }}" rel="stylesheet">
     <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
     <link href="{{ asset('css/all.min.css') }}" rel="stylesheet">
 </head>
@@ -37,21 +38,21 @@
                     <div class="sb-sidenav-menu">
                         <div class="nav">
                             <div class="sb-sidenav-menu-heading">Sistema</div>
-                            <a class="nav-link" href="{{ route('operation.index') }}">
+                            <a class="nav-link" href="{{ route('dashboard.index') }}">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Dashboard
                             </a>
                             <a class="nav-link" href="{{ route('operation.index') }}">
-                                <div class="sb-nav-link-icon"><i class="fa-solid fa-money-bill-transfer"></i></i></div>
+                                <div class="sb-nav-link-icon"><i class="fa-solid fa-money-bill-transfer"></i></div>
                                 Movimentações
                             </a>
                             <div class="sb-sidenav-menu-heading">Cadastro</div>
                             <a class="nav-link" href="{{ route('category.index') }}">
-                                <div class="sb-nav-link-icon"><i class="fa-solid fa-list"></i></i></div>
+                                <div class="sb-nav-link-icon"><i class="fa-solid fa-list"></i></div>
                                 Categorias
                             </a>
                             <a class="nav-link" href="{{ route('expense.index') }}">
-                                <div class="sb-nav-link-icon"><i class="fa-solid fa-money-check-dollar"></i></i></div>
+                                <div class="sb-nav-link-icon"><i class="fa-solid fa-money-check-dollar"></i></div>
                                 Despesas
                             </a>
                             <a class="nav-link" href="{{ route('bank.index') }}">
@@ -59,7 +60,7 @@
                                 Bancos
                             </a>
                             <a class="nav-link" href="{{ route('account.index') }}">
-                                <div class="sb-nav-link-icon"><i class="fa-solid fa-receipt"></i></i></div>
+                                <div class="sb-nav-link-icon"><i class="fa-solid fa-receipt"></i></div>
                                 Contas
                             </a>
                         </div>

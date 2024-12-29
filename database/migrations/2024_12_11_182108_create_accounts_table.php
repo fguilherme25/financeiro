@@ -18,8 +18,8 @@ return new class extends Migration
             $table->integer('number');
             $table->integer('digit');
             $table->string('type', length: 2);
-            $table->double('limit');
-            $table->double('balance');
+            $table->double('limit')->default(0);;
+            $table->double('balance')->default(0);;
             $table->integer('status')->default(1);
             $table->timestamps();
         });

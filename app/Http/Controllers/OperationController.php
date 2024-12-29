@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use Exception;
+use App\Models\Account;
+use App\Models\Expense;
 use App\Models\Operation;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreOperationRequest;
-use App\Http\Requests\UpdateOperationRequest;
+use App\Http\Requests\OperationRequest;
 
 class OperationController extends Controller
 {
@@ -14,7 +17,11 @@ class OperationController extends Controller
      */
     public function index()
     {
-        return \view('operations.index');
+        $operations = Operation::where('status', 1)
+            ->orderBy('date')
+            ->get();
+
+        return \view('operations.index',['operations' => $operations]);
     }
 
     /**
@@ -22,15 +29,52 @@ class OperationController extends Controller
      */
     public function create()
     {
-        return \view('operations.create');
+        $accounts = Account::where('status', 1)
+            ->orderBy('bank_id')
+            ->get();
+
+        $expenses = Expense::where('status', 1)
+            ->orderBy('name')
+            ->get();
+
+        return \view('operations.create',[
+            'accounts' => $accounts,
+            'expenses' => $expenses,
+            ]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreOperationRequest $request)
+    public function store(OperationRequest $request)
     {
-        //
+        $request->validated();
+
+        DB::beginTransaction();
+
+        try{
+
+            Operation::create([
+                'account_id' => $request->account_id,    
+                'expense_id' => $request->expense_id,
+                'date' => $request->date,
+                'type' => $request->type,
+                'description' => $request->description,
+                'amount' => $request->amount,
+            ]);
+
+            DB::commit();
+
+            return \redirect()
+                        ->route('operation.index')
+                        ->with('success', 'Operação cadastrada com sucesso!');
+        } catch (Exception $e){
+            DB::rollBack();
+
+            return \redirect()
+                       ->route('operation.index')
+                        ->with('error', 'Erro ao tentar cadastrar a Operação!');
+        }
     }
 
     /**
@@ -38,7 +82,7 @@ class OperationController extends Controller
      */
     public function show(Operation $operation)
     {
-        return \view('operations.show');
+        return \view('operations.show', ['operation' => $operation]);
     }
 
     /**
@@ -46,13 +90,13 @@ class OperationController extends Controller
      */
     public function edit(Operation $operation)
     {
-        return \view('operations.edit');
+        //
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateOperationRequest $request, Operation $operation)
+    public function update(OperationRequest $request, Operation $operation)
     {
         //
     }
@@ -62,6 +106,31 @@ class OperationController extends Controller
      */
     public function destroy(Operation $operation)
     {
-        //
+        return \view('operations.destroy', ['operation' => $operation]);
+    }
+
+    public function disable(Operation $operation)
+    {
+        DB::beginTransaction();
+
+        try{
+
+            $operation->update([
+                'status' => 0,
+            ]);
+
+            DB::commit();
+
+            return \redirect()
+                        ->route('operation.index')
+                        ->with('success', 'Operação excluída com sucesso!');
+        } catch (Exception $e){
+
+            DB::rollBack();
+
+            return \redirect()
+                        ->route('account.index')
+                        ->with('error', 'Erro ao tentar excluir a Operação!');
+        }
     }
 }

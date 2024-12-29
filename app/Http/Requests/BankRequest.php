@@ -23,7 +23,7 @@ class BankRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'code' => 'required|unique:banks,code,'.$this->id,
+            'code' => 'required',
             'name' => 'required',
         ];
     }
@@ -32,7 +32,6 @@ class BankRequest extends FormRequest
     {
         return [
             'code.required' => 'É obrigatório informar o CÓDIGO do Banco',
-            'code.unique' => 'O CÓDIGO informado já está cadastrado',
             'name.required' => 'É obrigatório informar o NOME do Banco',
         ];
     }

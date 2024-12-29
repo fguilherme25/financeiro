@@ -10,7 +10,7 @@ class Operation extends Model
 
     protected $fillable = [
         'account_id',
-        'category_id',
+        'expense_id',
         'date',
         'type',
         'description',
