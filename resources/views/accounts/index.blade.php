@@ -17,7 +17,9 @@
             <div class="card-header hstack gap-2">
                 <div>Lista das Contas</div>
                 <div class="ms-auto">
-                    <a href="{{ route('account.create') }}" class="btn btn-success btn-sm" role="button">Nova Conta</a>
+                    <a href="{{ route('account.create') }}" class="btn btn-success btn-sm" role="button">
+                        <i class="fa-regular fa-square-plus mx-1"></i>
+                        Nova Conta</a>
                 </div>
             </div>
             <div class="card-body">
@@ -58,9 +60,6 @@
                         @endforelse
                     </tbody>
                 </table>
-            </div>
-            <div class="card-footer">
-                {{ $accounts->links() }}
             </div>
         </div>
     </div>

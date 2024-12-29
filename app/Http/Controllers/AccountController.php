@@ -18,9 +18,12 @@ class AccountController extends Controller
     {
         $accounts = Account::where('status', 1)
             ->orderBy('bank_id')
-            ->paginate(2);
+            ->get();
 
-        return \view('accounts.index',['accounts' => $accounts]);
+        return \view('accounts.index',[
+            'menu' => 'account',
+            'accounts' => $accounts,
+            ]);
     }
 
     /**
@@ -32,7 +35,10 @@ class AccountController extends Controller
             ->orderBy('name')
             ->get();
 
-        return \view('accounts.create',['banks' => $banks]);
+        return \view('accounts.create',[
+            'menu' => 'account',
+            'banks' => $banks
+            ]);
     }
 
     /**
@@ -75,7 +81,10 @@ class AccountController extends Controller
      */
     public function show(Account $account)
     {
-        return \view('accounts.show', ['account' => $account]);
+        return \view('accounts.show', [
+            'menu' => 'account',
+            'account' => $account
+            ]);
     }
 
     /**
@@ -88,6 +97,7 @@ class AccountController extends Controller
             ->get();
 
         return \view('accounts.edit', [
+            'menu' => 'account',
             'account' => $account,
             'banks' => $banks,
             ]);
@@ -131,7 +141,10 @@ class AccountController extends Controller
      */
      public function destroy(Account $account)
     {
-        return \view('accounts.destroy', ['account' => $account]);
+        return \view('accounts.destroy', [
+            'menu' => 'account',
+            'account' => $account
+            ]);
     }
 
     public function disable(Account $account)

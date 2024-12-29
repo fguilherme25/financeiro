@@ -20,7 +20,10 @@ class CategoryController extends Controller
             ->orderBy('name')
             ->get();
 
-        return \view('categories.index',['categories' => $categories]);
+        return \view('categories.index',[
+            'menu' => 'category',
+            'categories' => $categories
+            ]);
     }
 
     /**
@@ -28,7 +31,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return \view('categories.create');
+        return \view('categories.create', ['menu' => 'category',]);
     }
 
     /**
@@ -67,7 +70,10 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        return \view('categories.show', ['category' => $category]);
+        return \view('categories.show', [
+            'menu' => 'category',
+            'category' => $category
+            ]);
     }
 
     /**
@@ -75,7 +81,10 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        return \view('categories.edit', ['category' => $category]);
+        return \view('categories.edit', [
+            'menu' => 'category',
+            'category' => $category
+            ]);
     }
 
     /**
@@ -115,7 +124,10 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        return \view('categories.destroy', ['category' => $category]);
+        return \view('categories.destroy', [
+            'menu' => 'category',
+            'category' => $category
+            ]);
     }
 
     public function disable(Category $category)

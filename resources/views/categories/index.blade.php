@@ -17,7 +17,9 @@
             <div class="card-header hstack gap-2">
                 <div>Lista das Categorias</div>
                 <div class="ms-auto">
-                    <a href="{{ route('category.create') }}" class="btn btn-success btn-sm" role="button">Nova Categoria</a>
+                    <a href="{{ route('category.create') }}" class="btn btn-success btn-sm" role="button">
+                        <i class="fa-regular fa-square-plus mx-1"></i>
+                        Nova Categoria</a>
                 </div>
             </div>
             <div class="card-body">

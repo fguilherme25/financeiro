@@ -44,7 +44,10 @@
                     
                 </div>
                 <div class="card-footer">
-                    <button type="submit" class="btn btn-success btn-sm">Salvar</button>
+                    <button type="submit" class="btn btn-success btn-sm">
+                        <i class="fa-solid fa-download mx-1"></i>
+                        Salvar
+                    </button>
                 </div>
             </form>               
         </div>

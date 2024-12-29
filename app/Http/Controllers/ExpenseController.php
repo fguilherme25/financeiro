@@ -21,7 +21,10 @@ class ExpenseController extends Controller
             ->orderBy('name')
             ->get();
 
-        return \view('expenses.index',['expenses' => $expenses]);
+        return \view('expenses.index',[
+            'menu' => 'expense',
+            'expenses' => $expenses
+            ]);
     }
 
     /**
@@ -33,7 +36,10 @@ class ExpenseController extends Controller
             ->orderBy('name')
             ->get();
 
-        return \view('expenses.create',['categories' => $categories]);
+        return \view('expenses.create',[
+            'menu' => 'expense',
+            'categories' => $categories
+            ]);
     }
 
     /**
@@ -71,7 +77,10 @@ class ExpenseController extends Controller
      */
     public function show(Expense $expense)
     {
-        return \view('expenses.show', ['expense' => $expense]);
+        return \view('expenses.show', [
+            'menu' => 'expense',
+            'expense' => $expense
+            ]);
     }
 
     /**
@@ -84,6 +93,7 @@ class ExpenseController extends Controller
             ->get();
 
         return \view('expenses.edit', [
+            'menu' => 'expense',
             'expense' => $expense,
             'categories' => $categories,
             ]);
@@ -124,7 +134,10 @@ class ExpenseController extends Controller
      */
     public function destroy(Expense $expense)
     {
-        return \view('expenses.destroy', ['expense' => $expense]);
+        return \view('expenses.destroy', [
+            'menu' => 'expense',
+            'expense' => $expense
+            ]);
     }
 
     public function disable(Expense $expense)

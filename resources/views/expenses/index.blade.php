@@ -17,7 +17,9 @@
             <div class="card-header hstack gap-2">
                 <div>Lista das Despesas</div>
                 <div class="ms-auto">
-                    <a href="{{ route('expense.create') }}" class="btn btn-success btn-sm" role="button">Nova Despesa</a>
+                    <a href="{{ route('expense.create') }}" class="btn btn-success btn-sm" role="button">
+                        <i class="fa-regular fa-square-plus mx-1"></i>
+                        Nova Despesa</a>
                 </div>
             </div>
             <div class="card-body">

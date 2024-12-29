@@ -1,0 +1,8 @@
+body {
+    font-size: 14px; /* Ajuste para o tamanho desejado */
+}
+
+.sb-nav-link-icon{
+    width: 25px;
+    text-align: center;
+}

@@ -38,7 +38,10 @@
                             <dd class="col-sm-11">{{ $category->name }}</dd>
                         </dl>
 
-                        <button type="submit" class="btn btn-danger btn-small">Confirmar</button>
+                        <button type="submit" class="btn btn-danger btn-small">
+                            <i class="fa-regular fa-circle-check mx-2"></i>
+                            Confirmar
+                        </button>
                     </form>
 
                 <hr>

@@ -19,9 +19,12 @@ class OperationController extends Controller
     {
         $operations = Operation::where('status', 1)
             ->orderBy('date')
-            ->paginate(10);
+            ->paginate(20);
 
-        return \view('operations.index',['operations' => $operations]);
+        return \view('operations.index',[
+            'menu' => 'operation',
+            'operations' => $operations
+            ]);
     }
 
     /**
@@ -38,6 +41,7 @@ class OperationController extends Controller
             ->get();
 
         return \view('operations.create',[
+            'menu' => 'operation',
             'accounts' => $accounts,
             'expenses' => $expenses,
             ]);
@@ -82,7 +86,9 @@ class OperationController extends Controller
      */
     public function show(Operation $operation)
     {
-        return \view('operations.show', ['operation' => $operation]);
+        return \view('operations.show', [
+            'menu' => 'operation',
+            'operation' => $operation]);
     }
 
     /**
@@ -106,7 +112,9 @@ class OperationController extends Controller
      */
     public function destroy(Operation $operation)
     {
-        return \view('operations.destroy', ['operation' => $operation]);
+        return \view('operations.destroy', [
+            'menu' => 'operation',
+            'operation' => $operation]);
     }
 
     public function disable(Operation $operation)

@@ -17,7 +17,9 @@
             <div class="card-header hstack gap-2">
                 <div>Lista dos Bancos</div>
                 <div class="ms-auto">
-                    <a href="{{ route('bank.create') }}" class="btn btn-success btn-sm" role="button">Novo Banco</a>
+                    <a href="{{ route('bank.create') }}" class="btn btn-success btn-sm" role="button">
+                        <i class="fa-regular fa-square-plus mx-1"></i>
+                        Novo Banco</a>
                 </div>
             </div>
             <div class="card-body">

@@ -17,7 +17,9 @@
             <div class="card-header hstack gap-2">
                 <div>Lista das Operações</div>
                 <div class="ms-auto">
-                    <a href="{{ route('operation.create') }}" class="btn btn-success btn-sm" role="button">Nova Operação</a>
+                    <a href="{{ route('operation.create') }}" class="btn btn-success btn-sm" role="button">
+                        <i class="fa-regular fa-square-plus mx-1"></i>
+                        Nova Operação</a>
                 </div>
             </div>
             <div class="card-body">

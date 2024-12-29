@@ -19,7 +19,10 @@ class BankController extends Controller
             ->orderBy('name')
             ->get();
 
-        return \view('banks.index',['banks' => $banks]);
+        return \view('banks.index', [
+            'menu' => 'bank',
+            'banks' => $banks
+            ]);
     }
 
     /**
@@ -27,7 +30,7 @@ class BankController extends Controller
      */
     public function create()
     {
-        return \view('banks.create');
+        return \view('banks.create',['menu' => 'bank',]);
     }
 
     /**
@@ -68,7 +71,10 @@ class BankController extends Controller
     public function show(Bank $bank)
     {
 
-        return \view('banks.show', ['bank' => $bank]);
+        return \view('banks.show', [
+            'menu' => 'bank',
+            'bank' => $bank
+            ]);
     }
 
     /**
@@ -76,7 +82,10 @@ class BankController extends Controller
      */
     public function edit(Bank $bank)
     {
-        return \view('banks.edit', ['bank' => $bank]);
+        return \view('banks.edit', [
+            'menu' => 'bank',
+            'bank' => $bank
+            ]);
     }
 
     /**
@@ -115,7 +124,10 @@ class BankController extends Controller
      */
     public function destroy(Bank $bank)
     {
-        return \view('banks.destroy', ['bank' => $bank]);
+        return \view('banks.destroy', [
+            'menu' => 'bank',
+            'bank' => $bank
+            ]);
     }
 
     public function disable(Bank $bank)
