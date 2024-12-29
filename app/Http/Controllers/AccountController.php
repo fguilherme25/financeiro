@@ -18,7 +18,7 @@ class AccountController extends Controller
     {
         $accounts = Account::where('status', 1)
             ->orderBy('bank_id')
-            ->get();
+            ->paginate(2);
 
         return \view('accounts.index',['accounts' => $accounts]);
     }

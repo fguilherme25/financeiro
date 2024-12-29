@@ -19,7 +19,7 @@ class OperationController extends Controller
     {
         $operations = Operation::where('status', 1)
             ->orderBy('date')
-            ->get();
+            ->paginate(10);
 
         return \view('operations.index',['operations' => $operations]);
     }
