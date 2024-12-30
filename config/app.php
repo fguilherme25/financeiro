@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('APP_NAME', 'Financeiro'),
 
     /*
     |--------------------------------------------------------------------------
@@ -52,7 +52,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://localhost/financeiro'),
+    'url' => env('APP_URL', 'http://localhost/financeiro/public'),
 
     /*
     |--------------------------------------------------------------------------

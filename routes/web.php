@@ -3,16 +3,22 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BankController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\OperationController;
+use App\Http\Controllers\UserController;
 
-Route::get('/', [App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard.index');
+//Home
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
+//Autenticação
 Auth::routes();
+
+//Dashboards
+Route::get('/home', [DashboardController::class, 'index'])->name('dashboard.index');
 
 //Banks
 Route::get('/banks', [BankController::class, 'index'])->name('bank.index');
@@ -64,6 +70,12 @@ Route::put('/operations/update/{operation}', [OperationController::class, 'updat
 Route::get('/operations/destroy/{operation}', [OperationController::class, 'destroy'])->name('operation.destroy');
 Route::put('/operations/disable/{operation}', [OperationController::class, 'disable'])->name('operation.disable');
 
-
-
-
+//User
+Route::get('/users', [UserController::class, 'index'])->name('user.index');
+Route::get('/users/show/{user}', [UserController::class, 'show'])->name('user.show');
+Route::get('/users/create', [UserController::class, 'create'])->name('user.create');
+Route::post('/users/store', [UserController::class, 'store'])->name('user.store');
+Route::get('/users/edit/{user}', [UserController::class, 'edit'])->name('user.edit');
+Route::put('/users/update/{user}', [UserController::class, 'update'])->name('user.update');
+Route::get('/users/destroy/{user}', [UserController::class, 'destroy'])->name('user.destroy');
+Route::put('/users/disable/{user}', [UserController::class, 'disable'])->name('user.disable');

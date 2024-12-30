@@ -77,6 +77,13 @@
                                 </div>
                                 Contas
                             </a>
+                            <div class="sb-sidenav-menu-heading">Administração</div>
+                            <a @class(['nav-link', 'active' => isset($menu) && $menu=='users' ]) href="{{ route('user.index') }}">
+                                <div class="sb-nav-link-icon">
+                                    <i class="fas fa-users"></i>
+                                </div>
+                                Usuários
+                            </a>
                         </div>
                     </div>
                     <div class="sb-sidenav-footer">
