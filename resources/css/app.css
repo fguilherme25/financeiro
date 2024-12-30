@@ -1,3 +1,4 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'styles_layout.css';
+@import 'bootstrap-extended.css';
+@import 'styles.css';
+@import '@fortawesome/fontawesome-free/css/all.min.css';

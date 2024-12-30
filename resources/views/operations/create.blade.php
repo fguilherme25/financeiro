@@ -62,7 +62,7 @@
  
                     <div class="d-flex">
                         <div class="form-floating mb-3 me-2">
-                            <input type="date" class="form-control" name="date" id="date" value="{{ old('date') }}" placeholder="Data" required>
+                            <input type="date" class="form-control" name="date" id="date" value="{{ old('date') }}" placeholder="dd/mm/aaaa" required>
                             <label for="code">Data</label>
                         </div>
 
@@ -90,4 +90,7 @@
             </form>               
         </div>
     </div>
+
+    <script> $(document).ready(function(){ $('#date').mask('00/00/0000'); // Aplica a máscara de data }); </script>
 @endsection
+
