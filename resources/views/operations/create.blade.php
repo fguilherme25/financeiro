@@ -33,12 +33,12 @@
 
                     <div class="mb-3">
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="type" id="type" value="C">
-                            <label class="form-check-label" for="type">Crédito</label>
+                            <input class="form-check-input" type="radio" name="type" id="typeC" value="C">
+                            <label class="form-check-label" for="typeC">Crédito</label>
                         </div>  
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="type" id="type" value="D">
-                            <label class="form-check-label" for="type">Débito</label>
+                            <input class="form-check-input" type="radio" name="type" id="typeD" value="D">
+                            <label class="form-check-label" for="typeD">Débito</label>
                         </div>
                     </div>
 
@@ -63,16 +63,16 @@
                     <div class="d-flex">
                         <div class="form-floating mb-3 me-2">
                             <input type="date" class="form-control" name="date" id="date" value="{{ old('date') }}" placeholder="dd/mm/aaaa" required>
-                            <label for="code">Data</label>
+                            <label for="date">Data</label>
                         </div>
 
                         <div class="form-floating col-4 mb-3 me-2">
                             <input type="text" class="form-control" name="description" id="description" value="{{ old('description') }}" placeholder="Conta" required>
-                            <label for="code">Descrição</label>
+                            <label for="description">Descrição</label>
                         </div>
                         <div class="form-floating mb-3 me-2">
-                            <input type="text" class="form-control text-end" name="amount" id="amount" value="{{ old('amount') }}" placeholder="Saldo" required>
-                            <label for="code">Valor (R$)</label> 
+                            <input type="text" class="form-control text-end numeric-mask" name="amount" id="amount" value="{{ old('amount') }}" placeholder="Saldo" required>
+                            <label for="amount">Valor (R$)</label> 
                         </div>
                     </div>
 
@@ -90,7 +90,5 @@
             </form>               
         </div>
     </div>
-
-    <script> $(document).ready(function(){ $('#date').mask('00/00/0000'); // Aplica a máscara de data }); </script>
 @endsection
 

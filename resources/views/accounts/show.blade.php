@@ -41,9 +41,9 @@
                     <dt class="col-sm-1">Conta</dt>
                     <dd class="col-sm-11">{{ $account->number }} - {{ $account->digit }}</dd>
                     <dt class="col-sm-1">Limite</dt>
-                    <dd class="col-sm-11">{{ $account->limit }}</dd>
+                    <dd class="col-sm-11 numeric-mask">{{ $account->limit }}</dd>
                     <dt class="col-sm-1">Saldo</dt>
-                    <dd class="col-sm-11">{{ $account->balance }}</dd>
+                    <dd class="col-sm-11 numeric-mask">{{ $account->balance }}</dd>
                 </dl>
             </div>
         </div>

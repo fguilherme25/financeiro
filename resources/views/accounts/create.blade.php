@@ -66,12 +66,12 @@
                         </div>
 
                         <div class="form-floating mb-3 col-1 me-2">
-                            <input type="text" class="form-control text-end" name="limit" id="limit" value="{{ old('limit') }}" placeholder="Limite" required>
+                            <input type="text" class="form-control text-end numeric-mask" name="limit" id="limit" value="{{ old('limit') }}" placeholder="Limite" required>
                             <label for="code">Limite (R$)</label>
                         </div>
 
                         <div class="form-floating mb-3 col-1 me-2">
-                            <input type="text" class="form-control text-end" name="balance" id="balance" value="{{ old('balance') }}" placeholder="Saldo" required>
+                            <input type="text" class="form-control text-end numeric-mask" name="balance" id="balance" value="{{ old('balance') }}" placeholder="Saldo" required>
                             <label for="code">Saldo (R$)</label>
                         </div>
                     </div>

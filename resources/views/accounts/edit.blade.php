@@ -66,7 +66,7 @@
                         </div>
 
                         <div class="form-floating mb-3 col-1 me-2">
-                            <input type="text" class="form-control text-end" name="limit" id="limit" value="{{ old('limit',$account->limit) }}" placeholder="Limite" required>
+                            <input type="text" class="form-control text-end numeric-mask" name="limit" id="limit" value="{{ old('limit',$account->limit) }}" placeholder="Limite" required>
                             <label for="code">Limite (R$)</label>
                         </div>
 
