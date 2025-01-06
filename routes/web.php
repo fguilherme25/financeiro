@@ -7,9 +7,12 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CreditcardController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\OperationController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\UserController;
+
 
 //Home
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -69,6 +72,27 @@ Route::get('/operations/edit/{operation}', [OperationController::class, 'edit'])
 Route::put('/operations/update/{operation}', [OperationController::class, 'update'])->name('operation.update');
 Route::get('/operations/destroy/{operation}', [OperationController::class, 'destroy'])->name('operation.destroy');
 Route::put('/operations/disable/{operation}', [OperationController::class, 'disable'])->name('operation.disable');
+
+//Creditcards
+Route::get('/creditcards', [CreditcardController::class, 'index'])->name('creditcard.index');
+Route::get('/creditcards/dashboard', [CreditcardController::class, 'dashboard'])->name('creditcard.dashboard');
+Route::get('/creditcards/show/{creditcard}', [CreditcardController::class, 'show'])->name('creditcard.show');
+Route::get('/creditcards/create', [CreditcardController::class, 'create'])->name('creditcard.create');
+Route::post('/creditcards/store', [CreditcardController::class, 'store'])->name('creditcard.store');
+Route::get('/creditcards/edit/{creditcard}', [CreditcardController::class, 'edit'])->name('creditcard.edit');
+Route::put('/creditcards/update/{creditcard}', [CreditcardController::class, 'update'])->name('creditcard.update');
+Route::get('/creditcards/destroy/{creditcard}', [CreditcardController::class, 'destroy'])->name('creditcard.destroy');
+Route::put('/creditcards/disable/{creditcard}', [CreditcardController::class, 'disable'])->name('creditcard.disable');
+
+//Payments
+Route::get('/payments', [PaymentController::class, 'index'])->name('payment.index');
+Route::get('/payments/show/{payment}', [PaymentController::class, 'show'])->name('payment.show');
+Route::get('/payments/create', [PaymentController::class, 'create'])->name('payment.create');
+Route::post('/payments/store', [PaymentController::class, 'store'])->name('payment.store');
+Route::get('/payments/edit/{payment}', [PaymentController::class, 'edit'])->name('payment.edit');
+Route::put('/payments/update/{payment}', [PaymentController::class, 'update'])->name('payment.update');
+Route::get('/payments/destroy/{payment}', [PaymentController::class, 'destroy'])->name('payment.destroy');
+Route::put('/payments/disable/{payment}', [PaymentController::class, 'disable'])->name('payment.disable');
 
 //User
 Route::get('/users', [UserController::class, 'index'])->name('user.index');

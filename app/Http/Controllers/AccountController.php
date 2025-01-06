@@ -139,7 +139,7 @@ class AccountController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-     public function destroy(Account $account)
+    public function destroy(Account $account)
     {
         return \view('accounts.destroy', [
             'menu' => 'account',

@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
+use Carbon\Carbon;
 use App\Models\Account;
 use App\Models\Operation;
-use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use App\Charts\ExpenseRevenue;
 
 class DashboardController extends Controller
 {
@@ -33,16 +35,51 @@ class DashboardController extends Controller
             ->orderBy('bank_id')
             ->get();
 
-        $totalBalance = Account::where('status', 1)
+        $totalBalanceCC = Account::where('status', 1)
+            ->where('type', 'CC')
+            ->sum('balance');
+        $totalBalanceCP = Account::where('status', 1)
+            ->where('type', 'CP')
             ->sum('balance');
 
+        //Dados para os gráficos
+        $chartExpenses = DB::table('operations')
+            ->where('status', 1)
+            ->whereYear('date', $currentYear)
+            ->whereMonth('date', $currentMonth)
+            ->where('type', 'D')
+            ->select(DB::raw('SUM(amount) as total'), DB::raw('MONTH(date) as mes'))
+            ->groupBy('mes')
+            ->pluck('total', 'mes')->toArray();
 
+        $chartRevenues = DB::table('operations')
+            ->where('status', 1)
+            ->whereYear('date', $currentYear)
+            ->whereMonth('date', $currentMonth)
+            ->where('type', 'C')
+            ->select(DB::raw('SUM(amount) as total'), DB::raw('MONTH(date) as mes'))
+            ->groupBy('mes')
+            ->pluck('total', 'mes')->toArray();
+
+        $chart = new ExpenseRevenue;
+        $chart->labels(\array_keys($chartExpenses));
+        $chart->dataset('Despesas', 'line', \array_values($chartExpenses))
+            ->color('red')
+            ->backgroundcolor('red');
+        $chart->dataset('Receitas', 'line', \array_values($chartRevenues))
+            ->color('green')
+            ->backgroundcolor('green');
+
+        //Enviar os dados para a view    
+              
         return \view('dashboards.index',[
             'menu' => 'dashboard',
             'totalRevenue' => $totalRevenue,
             'totalExpense' => $totalExpense,
             'accounts'     => $accounts,
-            'totalBalance' => $totalBalance,
+            'totalBalanceCC' => $totalBalanceCC,
+            'totalBalanceCP' => $totalBalanceCP,
+            'chart' => $chart,
             ]);
     }
 }

@@ -67,6 +67,8 @@ class OperationController extends Controller
                 'amount' => $request->amount,
             ]);
 
+            $this->updateBalance($request->account_id, $request->amount, $request->type);
+
             DB::commit();
 
             return \redirect()
@@ -79,6 +81,20 @@ class OperationController extends Controller
                        ->route('operation.index')
                         ->with('error', 'Erro ao tentar cadastrar a Operação!');
         }
+    }
+
+    
+    private function updateBalance($account_id, $amount, $type)
+    {
+        $account = Account::findOrFail($account_id);
+
+        if ($type === 'C' or $type === 'E') {
+            $account->balance += $amount;
+        } else {
+            $account->balance -= $amount;
+        }
+
+        $account->save();
     }
 
     /**

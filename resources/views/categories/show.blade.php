@@ -40,7 +40,9 @@
                     </thead>
                     <tbody>
                         @forelse ($category->expense as $expense)
-                            <td>{{ $expense->name }}</td>
+                            <tr>
+                                <td>{{ $expense->name }}</td>
+                            </tr>
                         @empty
                             <div class="alert alert-info" role="alert">
                                 Nenhuma Despesa cadastrada na Categoria!

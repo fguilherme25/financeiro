@@ -11,6 +11,7 @@
             'resources/js/app.js',
         ])
 
+        @yield('head')
         </head>
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
@@ -50,8 +51,21 @@
                                 <div class="sb-nav-link-icon">
                                     <i class="fa-solid fa-money-bill-transfer"></i>
                                 </div>
-                                Movimentações
+                                Conta Corrente
                             </a>
+                            <div class="sb-sidenav-menu-heading">Cartáo de Crédito</div>
+                            <a @class(['nav-link', 'active' => isset($menu) && $menu=='creditcarddashboard' ]) href="{{ route('creditcard.dashboard') }}">
+                                <div class="sb-nav-link-icon">
+                                    <i class="fas fa-tachometer-alt"></i>
+                                </div>
+                                Dashboard
+                            </a>
+                            <a @class(['nav-link', 'active' => isset($menu) && $menu=='payment' ]) href="{{ route('payment.index') }}">
+                                <div class="sb-nav-link-icon">
+                                    <i class="fa-solid fa-cash-register"></i>
+                                </div>
+                                Pagamentos
+                            </a>                            
                             <div class="sb-sidenav-menu-heading">Cadastro</div>
                             <a @class(['nav-link', 'active' => isset($menu) && $menu=='category' ]) href="{{ route('category.index') }}">
                                 <div class="sb-nav-link-icon fa-lg">
@@ -77,6 +91,12 @@
                                 </div>
                                 Contas
                             </a>
+                            <a @class(['nav-link', 'active' => isset($menu) && $menu=='creditcard' ]) href="{{ route('creditcard.index') }}">
+                                <div class="sb-nav-link-icon">
+                                    <i class="fa-regular fa-credit-card"></i>
+                                </div>
+                                Cartões
+                            </a>
                             <div class="sb-sidenav-menu-heading">Administração</div>
                             <a @class(['nav-link', 'active' => isset($menu) && $menu=='users' ]) href="{{ route('user.index') }}">
                                 <div class="sb-nav-link-icon">
@@ -99,5 +119,6 @@
             </div>
         </div>
         
+        @yield('scripts')
     </body>
 </html>

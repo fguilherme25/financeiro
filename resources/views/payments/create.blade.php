@@ -1,60 +1,41 @@
 @extends('layouts.main')
 
-@section('title','Operação')
+@section('title','Pagamento')
 
 @section('content')
     <div class="container-fluid mt-4 px-4">
         <div class="hstack gap-2">
-            <h4>Operação</h4>
+            <h4>Pagamento</h4>
 
             <ol class="breadcrumb ms-auto">
-                <li class="breadcrumb-item">Sistema</li>
+                <li class="breadcrumb-item">Cartão de Crédito</li>
                 <li class="breadcrumb-item" >
-                    <a href="{{ route('account.index') }}" class="text-decoration-none">Operações</a>
+                    <a href="{{ route('payment.index') }}" class="text-decoration-none">Pagamentos</a>
                 </li>
-                <li class="breadcrumb-item active">Nova Operação</li>
+                <li class="breadcrumb-item active">Novo Pagamento</li>
             </ol>
         </div>
 
         <div class="card mb-4">
             <div class="card-header hstack gap-2">
-                <div>Nova Operação</div>
+                <div>Novo Pagamento</div>
                 <div class="ms-auto">
-                    <a href="{{ route('operation.index') }}" class="btn btn-secondary btn-sm" role="button">
-                        <i class="fa-solid fa-receipt mx-2"></i>Operações
+                    <a href="{{ route('payment.index') }}" class="btn btn-secondary btn-sm" role="button">
+                        <i class="fa-solid fa-cash-register mx-2"></i>Pagamentos
                     </a>
                 </div>
             </div>
-            <form action="{{ route('operation.store') }}" method="POST">
+            <form action="{{ route('payment.store') }}" method="POST">
                 @csrf
                     
                 <div class="card-body">
                     <x-alert />
 
-                    <div class="mb-3">
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="type" id="typeC" value="C">
-                            <label class="form-check-label" for="typeC">Crédito</label>
-                        </div>  
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="type" id="typeD" value="D">
-                            <label class="form-check-label" for="typeD">Débito</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="type" id="typeD" value="E">
-                            <label class="form-check-label" for="typeD">Transferência Entrada</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="type" id="typeD" value="S">
-                            <label class="form-check-label" for="typeD">Transferência Saída</label>
-                        </div>
-                    </div>
-
-                    <select name="account_id" id="account_id" class="form-select form-select-lg mb-3">
-                        <option value="" disabled selected>Selecione uma Conta</option>
-                        @foreach($accounts as $account) 
-                            <option value="{{ $account->id }}" {{ old('account_id') == $account->id ? 'selected' : '' }}>
-                                {{ $account->bank->name }} - {{ $account->number }}-{{ $account->digit }} / {{ $account->type }}
+                    <select name="creditcard_id" id="creditcard_id" class="form-select form-select-lg mb-3">
+                        <option value="" disabled selected>Selecione um Cartão de Crédito</option>
+                        @foreach($creditcards as $creditcard) 
+                            <option value="{{ $creditcard->id }}" {{ old('creditcard_id') == $creditcard->id ? 'selected' : '' }}>
+                                {{ $creditcard->name }} - {{ $creditcard->category }} - {{ $creditcard->flag }}
                             </option> 
                         @endforeach 
                     </select>
@@ -79,8 +60,16 @@
                             <label for="description">Descrição</label>
                         </div>
                         <div class="form-floating mb-3 me-2">
-                            <input type="text" class="form-control text-end numeric-mask" name="amount" id="amount" value="{{ old('amount') }}" placeholder="Saldo" required>
+                            <input type="text" class="form-control text-end" name="amount" id="amount" value="{{ old('amount') }}" placeholder="Saldo" required>
                             <label for="amount">Valor (R$)</label> 
+                        </div>
+                        <div class="form-floating mb-3 me-2">
+                            <input type="text" class="form-control text-end" name="invoiceMonth" id="invoiceMonth" value="{{ old('invoiceMonth') }}" placeholder="Mês" required>
+                            <label for="amount">Mês</label> 
+                        </div>
+                        <div class="form-floating mb-3 me-2">
+                            <input type="text" class="form-control text-end" name="invoiceYear" id="invoiceYear" value="{{ old('invoiceYear') }}" placeholder="Ano" required>
+                            <label for="amount">Ano</label> 
                         </div>
                     </div>
 

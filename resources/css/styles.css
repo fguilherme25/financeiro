@@ -6,3 +6,7 @@ body {
     width: 25px;
     text-align: center;
 }
+
+.sb-sidenav-menu-heading{
+    color: white !important;
+}
