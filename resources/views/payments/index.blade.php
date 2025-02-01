@@ -65,6 +65,7 @@
                             <th>Cartão</th>
                             <th>Despesa</th>
                             <th>Descrição</th>
+                            <th>Parcela</th>
                             <th class="text-end">Valor R$</th>
                             <th></th>
                         </tr>
@@ -76,6 +77,7 @@
                                 <td>{{ $payment->creditcard->name }} - {{ $payment->creditcard->category }}</td>
                                 <td>{{ $payment->expense->name }}</td>
                                 <td>{{ $payment->description }}</td>
+                                <td>{{ $payment->first }}/{{ $payment->last }}</td>
                                 <td class="text-end">{{ number_format( $payment->amount, 2, ',', '.') }}</td>
                                 <td class="d-flex justify-content-end">
                                     <a href="{{ route('payment.show', ['payment' => $payment->id]) }}" class="btn btn-primary btn-sm me-1"><i class="fa-solid fa-file-lines"></i></a>
@@ -97,3 +99,4 @@
         </div>
     </div>
 @endsection
+

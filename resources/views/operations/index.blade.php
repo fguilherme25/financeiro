@@ -15,6 +15,26 @@
             </ol>
         </div>
 
+        <div class="d-flex align-items-center mt-2 mb-2">
+            <form action="{{ route('operation.index') }}" method="GET">
+                <div class="d-flex align-items-center">
+                    <select name="account_id" class="form-select">
+                        <option value="" disabled selected>Selecione a Conta</option>
+                        @foreach($accounts as $account)
+                            <option value="{{ $account->id }}" {{ $account->id==$currentAccount ? 'selected' : ''}}>
+                                {{ $account->bank->name }} / {{ $account->number }} - {{ $account->digit }}</option>
+                        @endforeach
+                    </select>
+
+                    <input type="text" class="form-control" name="operationMonth" id="operationMonth" value="{{ $currentMonth }}" placeholder="Mês">
+                    <input type="text" class="form-control" name="operationYear" id="operationYear" value="{{ $currentYear }}" placeholder="Ano">
+
+                    <button type="submit" class="btn btn-outline-success ms-1"><i class="fa-solid fa-filter"></i></i></button>
+                    <a href="{{ route('operation.index') }}" class="btn btn-outline-secondary ms-1"><i class="fa-solid fa-xmark"></i></a>
+                </div>
+            </form>
+        </div>
+
         <div class="card mb-4">
             <div class="card-header hstack gap-2">
                 <div>Lista das Operações</div>
@@ -32,6 +52,7 @@
                         <tr>
                             <th>Data</th>
                             <th>Referente a</th>
+                            <th>Descrição</th>
                             <th class="text-end">Valor R$</th>
                             <th>Tipo</th>
                             <th>Conta</th>
@@ -43,6 +64,7 @@
                             <tr class="{{ ($operation->type =='D') ? 'text-danger' : (($operation->type =='C') ? 'text-success' : 'text-secondary'); }}">
                                 <td>{{ Carbon::parse($operation->date)->format('d/m/Y') }}</td>
                                 <td>{{ $operation->expense->name }} / {{ $operation->expense->category->name }}</td>
+                                <td>{{ $operation->description }}</td>
                                 <td class="text-end">{{ number_format($operation->amount, 2, ',', '.'); }}</td>
                                 <td class="mx-5">{{ $operation->type }}
                                 <td>{{ $operation->account->bank->name }} / {{ $operation->account->number }} - {{ $operation->account->digit }}</td>

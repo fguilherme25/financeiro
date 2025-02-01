@@ -17,6 +17,7 @@ class AccountController extends Controller
     public function index()
     {
         $accounts = Account::where('status', 1)
+            ->orderBy('type')
             ->orderBy('bank_id')
             ->get();
 
@@ -54,6 +55,7 @@ class AccountController extends Controller
 
             Account::create([
                 'type' => $request->type,    
+                'scope' => $request->scope,    
                 'bank_id' => $request->bank_id,
                 'agency' => $request->agency,
                 'number' => $request->number,

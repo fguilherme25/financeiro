@@ -42,6 +42,17 @@
                         </div>
                     </div>
 
+                    <div class="mb-3">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="scope" id="scope" value="PF">
+                            <label class="form-check-label" for="scope">Pessoa Física</label>
+                        </div>  
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="scope" id="scope" value="PJ">
+                            <label class="form-check-label" for="scope">Pessoa Jurídica</label>
+                        </div>
+                    </div>
+
                     <select name="bank_id" id="bank_id" class="form-select form-select-lg mb-3">
                         <option value="" disabled selected>Selecione um Banco</option>
                         @foreach($banks as $bank) 

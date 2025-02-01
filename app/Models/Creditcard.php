@@ -14,8 +14,6 @@ class Creditcard extends Model
        'category',
        'duedate',
        'limit',
-       'first',
-       'last',
        'status',
     ];
 

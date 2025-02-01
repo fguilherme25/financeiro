@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Charts\CreditcardExpense;
 use Exception;
 use Carbon\Carbon;
 use App\Models\Payment;
@@ -28,7 +29,7 @@ class CreditcardController extends Controller
             ->where('payments.status', 1)
             ->join('expenses', 'expenses.id','=','payments.expense_id')
             ->groupBy('expenses.name')
-            ->orderBy('total');
+            ->orderBy('total', 'DESC');
 
         $paymentsCategory = DB::table('payments')
             ->select('categories.name', DB::raw('SUM(amount) as total'))
@@ -36,7 +37,7 @@ class CreditcardController extends Controller
             ->join('expenses', 'expenses.id','=','payments.expense_id')
             ->join('categories', 'categories.id','=','expenses.category_id')
             ->groupBy('categories.name')
-            ->orderBy('total');
+            ->orderBy('total', 'DESC');
 
         $totalExpense = Payment::where('status', 1);
 
@@ -71,6 +72,19 @@ class CreditcardController extends Controller
             ->where('invoiceMonth', $currentMonth)
             ->get();
 
+        //Dados para os gráficos
+        $chartExpenses = DB::table('payments')
+            ->where('status', 1)
+            ->where('invoiceYear', $currentYear)
+            ->select(DB::raw('SUM(amount) as total'), DB::raw('invoiceMonth as mes'))
+            ->groupBy('mes')
+            ->pluck('total', 'mes')->toArray();
+
+        $chart = new CreditcardExpense;
+        $chart->labels(\array_keys($chartExpenses));
+        $chart->dataset('Despesas', 'line', \array_values($chartExpenses))
+            ->color('red');
+
         return \view('creditcards.dashboard',[
             'menu' => 'creditcarddashboard',
             'totalExpense' => $totalExpense,
@@ -82,6 +96,7 @@ class CreditcardController extends Controller
             'currentCreditcard' => $currentCreditcard,
             'allMonths' => $allMonth,
             'allYears' => $allYear,
+            'chart' => $chart,
             ]);
     }
 

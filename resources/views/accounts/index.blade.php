@@ -32,6 +32,7 @@
                             <th>Agência</th>
                             <th>Conta</th>
                             <th>Tipo</th>
+                            <th>Escopo</th>
                             <th class="text-end">Limite</th>
                             <th class="text-end">Saldo</th>
                             <th></th>
@@ -44,6 +45,7 @@
                                 <td>{{ $account->agency }}</td>
                                 <td>{{ $account->number }} - {{ $account->digit }}</td>
                                 <td>{{ $account->type }}</td>
+                                <td>{{ $account->scope }}</td>
                                 <td class="text-end">{{ number_format( $account->limit, 2, ',', '.') }}</td>
                                 <td class="text-end">{{ number_format( $account->balance, 2, ',', '.') }}</td>
                                 <td class="d-flex justify-content-end">

@@ -14,6 +14,7 @@ class Account extends Model
        'number',
        'digit',
        'type',
+       'scope',
        'limit',
        'balance',
        'status',

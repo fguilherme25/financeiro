@@ -54,7 +54,7 @@
                         <option value="" disabled selected>Selecione uma Conta</option>
                         @foreach($accounts as $account) 
                             <option value="{{ $account->id }}" {{ old('account_id') == $account->id ? 'selected' : '' }}>
-                                {{ $account->bank->name }} - {{ $account->number }}-{{ $account->digit }} / {{ $account->type }}
+                                {{ $account->bank->name }} - {{ $account->number }}-{{ $account->digit }} / {{ $account->type }}-{{ $account->scope }}
                             </option> 
                         @endforeach 
                     </select>

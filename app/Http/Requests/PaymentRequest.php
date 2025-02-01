@@ -29,6 +29,7 @@ class PaymentRequest extends FormRequest
             'amount' => 'required',
             'invoiceMonth' => 'required',
             'invoiceYear' => 'required',
+            'last' => 'required|numeric',
         ];
     }
 
@@ -42,6 +43,8 @@ class PaymentRequest extends FormRequest
             'amount.required' => 'É obrigatório informar o VALOR da Despesa.',
             'invoiceMonth.required' => 'É obrigatório informar o MÊS da Fatura.',
             'invoiceYear.required' => 'É obrigatório informar o ANO da Fatura.',
+            'last.required' => 'É obrigatório informar a ÚLTIMA Parcela.',
+            'last.numeric' => 'A ÚLTIMA Parcela precisa ser um número.',
         ];
     }
 }

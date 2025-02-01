@@ -11,9 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('creditcards', function (Blueprint $table) {
-            $table->integer('first')->default(1); 
-            $table->integer('last')->default(1); 
+        Schema::table('accounts', function (Blueprint $table) {
+            $table->string('scope')->default('PF'); 
         });
     }
 
@@ -22,10 +21,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('creditcards', function (Blueprint $table) {
+        Schema::table('accounts', function (Blueprint $table) {
             $table->dropColumn([
-                'first',
-                'last'
+                'scope',
                 ]);
         });
     }

@@ -23,6 +23,7 @@ class AccountRequest extends FormRequest
     {
         return [
             'type' => 'required',
+            'scope' => 'required',
             'bank_id' => 'required',
             'agency' => 'required|numeric',
             'number' => 'required|numeric',
@@ -36,6 +37,7 @@ class AccountRequest extends FormRequest
     {
         return [
             'type.required' => 'É obrigatório informar o TIPO da Conta',
+            'type.required' => 'É obrigatório informar o ESCOPO da Conta',
             'bank_id.required' => 'É obrigatório informar o NOME do Banco',
             'agency.required' => 'É obrigatório informar o número da AGÊNCA da Conta',
             'agency.numeric' => 'O número da AGÊNCA da Conta precisa ser um valor numérico',

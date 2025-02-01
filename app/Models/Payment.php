@@ -16,6 +16,8 @@ class Payment extends Model
         'amount',
         'invoiceMonth',
         'invoiceYear',
+        'first',
+        'last',
         'status',
     ];
 

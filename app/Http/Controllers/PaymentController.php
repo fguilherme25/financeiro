@@ -24,7 +24,7 @@ class PaymentController extends Controller
         $currentYear = Carbon::now()->year; 
 
         $payments = Payment::where('status', 1)
-            ->orderBy('date');
+            ->orderBy('date', 'DESC');
 
         $creditcards = Creditcard::where('status', 1)
             ->orderBy('name')
@@ -49,7 +49,7 @@ class PaymentController extends Controller
         $payments = $payments
             ->where('invoiceYear', $currentYear)
             ->where('invoiceMonth', $currentMonth)
-            ->paginate(15);
+            ->paginate(5000);
 
         return \view('payments.index',[
             'menu' => 'payment',
@@ -92,17 +92,32 @@ class PaymentController extends Controller
 
         DB::beginTransaction();
 
+        $invoiceMonth = $request->invoiceMonth;
+        $invoiceYear = $request->invoiceYear;
+        $first = $request->first;
+
         try{
 
-            Payment::create([
-                'creditcard_id' => $request->creditcard_id,    
-                'expense_id' => $request->expense_id,
-                'date' => $request->date,
-                'description' => $request->description,
-                'amount' => $request->amount,
-                'invoiceMonth' => $request->invoiceMonth,
-                'invoiceYear' => $request->invoiceYear,
-            ]);
+            for ($i=$first; $i < $request->last + 1 ; $i++) { 
+                Payment::create([
+                    'creditcard_id' => $request->creditcard_id,    
+                    'expense_id' => $request->expense_id,
+                    'date' => $request->date,
+                    'description' => $request->description,
+                    'amount' => $request->amount,
+                    'invoiceMonth' => $invoiceMonth,
+                    'invoiceYear' => $invoiceYear,
+                    'first' => $i,
+                    'last' => $request->last,
+                ]);
+
+                $invoiceMonth++;
+
+                if ($invoiceMonth == 13) {
+                    $invoiceMonth = 1;
+                    $invoiceYear++;
+                }
+            }
 
             DB::commit();
 
@@ -134,7 +149,20 @@ class PaymentController extends Controller
      */
     public function edit(Payment $payment)
     {
-       //
+        $creditcards = Creditcard::where('status', 1)
+            ->orderBy('name')
+            ->get();
+
+        $expenses = Expense::where('status', 1)
+            ->orderBy('name')
+            ->get();
+
+        return \view('payments.edit',[
+            'menu' => 'payment',
+            'creditcards' => $creditcards,
+            'expenses' => $expenses,
+            'payment' => $payment,
+            ]);
     }
 
     /**

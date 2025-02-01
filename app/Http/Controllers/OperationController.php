@@ -6,6 +6,7 @@ use Exception;
 use App\Models\Account;
 use App\Models\Expense;
 use App\Models\Operation;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\OperationRequest;
@@ -15,15 +16,43 @@ class OperationController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+        $currentAccount = '';
+        $currentMonth = ''; 
+        $currentYear = ''; 
+
         $operations = Operation::where('status', 1)
-            ->orderBy('date')
+            ->orderBy('date', 'DESC');
+
+        $accounts = Account::where('status', 1)
+            ->orderBy('bank_id')
+            ->get();
+
+        if($request->filled('operationMonth')){
+            $currentMonth = $request->operationMonth; 
+            $currentYear = $request->operationYear; 
+
+            $operations->whereMonth('date', $currentMonth);
+            $operations->whereYear('date', $currentYear);
+        }
+
+        if ($request->filled('account_id')){
+            $operations->where('account_id', $request->account_id);
+
+            $currentAccount = $request->account_id;
+        }
+
+        $operations = $operations
             ->paginate(20);
 
         return \view('operations.index',[
             'menu' => 'operation',
-            'operations' => $operations
+            'operations' => $operations,
+            'accounts' => $accounts,
+            'currentAccount' => $currentAccount,
+            'currentMonth' => $currentMonth,
+            'currentYear' => $currentYear,
             ]);
     }
 

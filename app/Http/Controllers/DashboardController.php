@@ -8,13 +8,14 @@ use App\Models\Operation;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Charts\ExpenseRevenue;
+use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         $currentMonth = Carbon::now()->month; 
         $currentYear = Carbon::now()->year; 
@@ -31,7 +32,27 @@ class DashboardController extends Controller
             ->where('type', 'D')
             ->sum('amount');
 
+        $operationsExpense = DB::table('operations')
+            ->select('expenses.name', DB::raw('SUM(amount) as total'))
+            ->where('operations.status', 1)
+            ->where('operations.type', 'D')
+            ->join('expenses', 'expenses.id','=','operations.expense_id')
+            ->groupBy('expenses.name')
+            ->orderBy('total','DESC')
+            ->get();
+
+        $operationsCategory = DB::table('operations')
+            ->select('categories.name', DB::raw('SUM(amount) as total'))
+            ->where('operations.status', 1)
+            ->where('operations.type', 'D')
+            ->join('expenses', 'expenses.id','=','operations.expense_id')
+            ->join('categories', 'categories.id','=','expenses.category_id')
+            ->groupBy('categories.name')
+            ->orderBy('total','DESC')
+            ->get();
+
         $accounts = Account::where('status', 1)
+            ->orderBy('type')
             ->orderBy('bank_id')
             ->get();
 
@@ -73,13 +94,18 @@ class DashboardController extends Controller
         //Enviar os dados para a view    
               
         return \view('dashboards.index',[
-            'menu' => 'dashboard',
-            'totalRevenue' => $totalRevenue,
-            'totalExpense' => $totalExpense,
-            'accounts'     => $accounts,
-            'totalBalanceCC' => $totalBalanceCC,
-            'totalBalanceCP' => $totalBalanceCP,
-            'chart' => $chart,
+            'menu'               => 'dashboard',
+
+            'totalRevenue'       => $totalRevenue,
+            'totalExpense'       => $totalExpense,
+            'operationsExpense'  => $operationsExpense,
+            'operationsCategory' => $operationsCategory,
+            'accounts'           => $accounts,
+            'totalBalanceCC'     => $totalBalanceCC,
+            'totalBalanceCP'     => $totalBalanceCP,
+            'chart'              => $chart,
+            'currentMonth'       => $currentMonth,
+            'currentYear'        => $currentYear,
             ]);
     }
 }

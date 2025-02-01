@@ -39,6 +39,8 @@
                     <dd class="col-sm-11">{{ $payment->amount }}</dd>
                     <dt class="col-sm-1">Fatura</dt>
                     <dd class="col-sm-11">{{ $payment->invoiceMonth }}/{{ $payment->invoiceYear }}</dd>
+                    <dt class="col-sm-1">Parcela</dt>
+                    <dd class="col-sm-11">{{ $payment->first }}/{{ $payment->last }}</dd>
                 </dl>
             </div>
         </div>

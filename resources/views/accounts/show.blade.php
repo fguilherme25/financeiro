@@ -28,9 +28,9 @@
             <div class="card-body">
                 <div class="fs-5 mb-3">
                     @if ($account->type=="CC")
-                        Conta Corrente
+                        Conta Corrente / {{ ($account->scope == 'PF' ? 'Pessoa Física' : 'Pessoa Jurídica') }}
                     @else
-                        Conta Poupança
+                        Conta Poupança / {{ ($account->scope == 'PF' ? 'Pessoa Física' : 'Pessoa Jurídica') }}
                     @endif
                 </div>
                 <dl class="row">
