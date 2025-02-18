@@ -42,6 +42,9 @@
                     <a href="{{ route('operation.create') }}" class="btn btn-success btn-sm" role="button">
                         <i class="fa-regular fa-square-plus mx-1"></i>
                         Nova Operação</a>
+                        <a href="{{ route('operation.transfer') }}" class="btn btn-success btn-sm" role="button">
+                    <i class="fa-regular fa-square-plus mx-1"></i>
+                        Nova Transferência</a>
                 </div>
             </div>
             <div class="card-body">

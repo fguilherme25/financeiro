@@ -68,6 +68,8 @@ Route::get('/operations', [OperationController::class, 'index'])->name('operatio
 Route::get('/operations/show/{operation}', [OperationController::class, 'show'])->name('operation.show');
 Route::get('/operations/create', [OperationController::class, 'create'])->name('operation.create');
 Route::post('/operations/store', [OperationController::class, 'store'])->name('operation.store');
+Route::get('/operations/transfer', [OperationController::class, 'transfer'])->name('operation.transfer');
+Route::post('/operations/dotransfer', [OperationController::class, 'dotransfer'])->name('operation.dotransfer');
 Route::get('/operations/edit/{operation}', [OperationController::class, 'edit'])->name('operation.edit');
 Route::put('/operations/update/{operation}', [OperationController::class, 'update'])->name('operation.update');
 Route::get('/operations/destroy/{operation}', [OperationController::class, 'destroy'])->name('operation.destroy');

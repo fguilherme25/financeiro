@@ -112,6 +112,62 @@ class OperationController extends Controller
         }
     }
 
+    public function transfer()
+    {
+        $accounts = Account::where('status', 1)
+            ->orderBy('bank_id')
+            ->get();
+
+        return \view('operations.transfer',[
+            'menu' => 'operation',
+            'accounts' => $accounts,
+            ]);
+    }
+
+    public function dotransfer(OperationRequest $request)
+    {
+        $request->validated();
+
+        DB::beginTransaction();
+
+        try{
+            //Débito
+            Operation::create([
+                'account_id' => $request->account_id_debit,    
+                'expense_id' => config('setup.transfer_account'),
+                'date' => $request->date,
+                'type' => 'S',
+                'description' => $request->description,
+                'amount' => $request->amount,
+            ]);
+
+            $this->updateBalance($request->account_id_debit, $request->amount, $request->type);
+
+            //Crédito
+            Operation::create([
+                'account_id' => $request->account_id_credit,    
+                'expense_id' => config('setup.transfer_account'),
+                'date' => $request->date,
+                'type' => 'E',
+                'description' => $request->description,
+                'amount' => $request->amount,
+            ]);
+
+            $this->updateBalance($request->account_id_credit, $request->amount, $request->type);
+
+            DB::commit();
+
+            return \redirect()
+                        ->route('operation.index')
+                        ->with('success', 'Operação cadastrada com sucesso!');
+        } catch (Exception $e){
+            DB::rollBack();
+
+            return \redirect()
+                       ->route('operation.index')
+                        ->with('error', 'Erro ao tentar cadastrar a Operação!');
+        }
+    }
     
     private function updateBalance($account_id, $amount, $type)
     {

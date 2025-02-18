@@ -106,7 +106,7 @@ class CreditcardController extends Controller
     public function index()
     {
         $creditcards = Creditcard::where('status', 1)
-            ->orderBy('name')
+            ->orderBy('duedate')
             ->get();
 
         return \view('creditcards.index',[

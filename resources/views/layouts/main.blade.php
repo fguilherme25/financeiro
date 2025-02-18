@@ -65,6 +65,12 @@
                                     <i class="fa-solid fa-cash-register"></i>
                                 </div>
                                 Pagamentos
+                            </a>
+                            <a @class(['nav-link', 'active' => isset($menu) && $menu=='creditcard' ]) href="{{ route('creditcard.index') }}">
+                                <div class="sb-nav-link-icon">
+                                    <i class="fa-regular fa-credit-card"></i>
+                                </div>
+                                Cartões
                             </a>                            
                             <div class="sb-sidenav-menu-heading">Cadastro</div>
                             <a @class(['nav-link', 'active' => isset($menu) && $menu=='category' ]) href="{{ route('category.index') }}">
@@ -90,12 +96,6 @@
                                     <i class="fa-solid fa-receipt"></i>
                                 </div>
                                 Contas
-                            </a>
-                            <a @class(['nav-link', 'active' => isset($menu) && $menu=='creditcard' ]) href="{{ route('creditcard.index') }}">
-                                <div class="sb-nav-link-icon">
-                                    <i class="fa-regular fa-credit-card"></i>
-                                </div>
-                                Cartões
                             </a>
                             <div class="sb-sidenav-menu-heading">Administração</div>
                             <a @class(['nav-link', 'active' => isset($menu) && $menu=='users' ]) href="{{ route('user.index') }}">
